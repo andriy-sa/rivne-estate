@@ -1,0 +1,37 @@
+{% extends "admin/app.twig" %}
+
+{% block content %}
+
+    {% if errors %}
+        <div class="alert alert-danger" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            {{ errors | raw }}
+        </div>
+    {% endif %}
+    <h2>Редагування ріелтора: {{ rieltor.name }}</h2>
+    <div id="create-rieltor">
+        <form method="post" enctype="multipart/form-data" action="/admin/rieltors/update/{{ rieltor.id }}">
+            <div class="form-group">
+                <label for="">ПІП</label>
+                <input type="text" name="name" class="form-control" value="{{ rieltor.name }}">
+            </div>
+            <div class="form-group">
+                <label for="">Телефон</label>
+                <textarea name="phone"  class="form-control" rows="6">{{ rieltor.phone }}</textarea>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-4">
+                    <img src="/assets/userfiles/rieltors/{{ rieltor.photo }}" alt="{{ rieltor.name }}">
+                </div>
+                <div class="col-sm-8">
+                    <label for="">Фото</label>
+                    <input type="file" name="image"  class="form-control">
+                </div>
+            </div>
+            <div class="clearfix"></div>
+            <div class="clearfix"></div>
+            <input type="submit" value="Зберегти" class="btn btn-success">
+        </form>
+    </div>
+
+{% endblock %}

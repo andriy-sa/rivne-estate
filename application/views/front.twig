@@ -1,0 +1,16 @@
+{% extends "app.twig" %}
+
+{% block content %}
+    <section id="front-slider">
+        {% for item in slides %}
+        <div class="item">
+            <img src="/assets/userfiles/slides/{{ item.image }}" alt="{{ item.title }}">
+            <div class="text-cont">
+                <div class="title">{{ item.title }}</div>
+                <div class="subtitle">{{ item.subtitle }}</div>
+                <div class="line"></div>
+            </div>
+        </div>
+        {% endfor %}
+    </section>
+{% endblock %}

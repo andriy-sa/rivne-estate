@@ -1,0 +1,58 @@
+{% extends "admin/app.twig" %}
+
+{% block content %}
+    {% if success %}
+        <div class="alert alert-success" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            {{ success }}
+        </div>
+    {% endif %}
+    {% if error %}
+        <div class="alert alert-danger" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            {{ error }}
+        </div>
+    {% endif %}
+    <h2>Категорії</h2>
+
+    <div class="category-items">
+        <table class="table table-striped table-bordered table-hover">
+            <thead>
+            <tr>
+                <th>#</th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for item in category %}
+                <tr>
+                    <td class="item">
+                        {{ item.title }}
+                    </td>
+                    <td>
+                        <form method="post" action="/admin/estates/category">
+                            <input type="hidden" value="{{ item.id }}" name="del_id">
+                            <input type="submit" name="delete" value="Видалити" class="btn btn-danger">
+                        </form>
+                    </td>
+                </tr>
+
+            {% endfor %}
+            </tbody>
+        </table>
+
+    </div>
+
+    <div class="panel panel-default">
+        <div class="panel-heading">Додати категорію</div>
+        <div class="panel-body">
+            <form method="post" action="/admin/estates/category">
+                <div class="form-group">
+                    <input type="text" name="title" class="form-control">
+                </div>
+                <input type="submit" name="create" class="btn btn-success" value="Додати">
+            </form>
+        </div>
+    </div>
+
+{% endblock %}

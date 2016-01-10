@@ -1,0 +1,58 @@
+{% extends "admin/app.twig" %}
+
+{% block content %}
+    {% if errors %}
+        <div class="alert alert-danger" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            {{ errors |raw }}
+        </div>
+    {% endif %}
+    {% if success %}
+        <div class="alert alert-success" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            {{ success }}
+        </div>
+    {% endif %}
+    <h2>Фото: {{ estate.title }}</h2>
+
+    <div class="photo-items">
+        <table class="table table-striped table-bordered table-hover">
+            <thead>
+            <tr>
+                <th>#</th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+                {% for item in estate.photos %}
+                    <tr>
+                        <td class="item">
+                            <img width="100px" height="50px" src="/assets/userfiles/photo/{{ item.image }}" alt="{{ estate.title }}">
+                        </td>
+                        <td>
+                            <form method="post" action="/admin/estates/photo/{{ estate.id }}">
+                                <input type="hidden" value="{{ item.id }}" name="del_id">
+                                <input type="submit" name="del_image" value="Видалити" class="btn btn-danger">
+                            </form>
+                        </td>
+                    </tr>
+
+                {% endfor %}
+            </tbody>
+        </table>
+
+    </div>
+
+    <div class="panel panel-default">
+        <div class="panel-heading">Додати фото</div>
+        <div class="panel-body">
+            <form method="post" enctype="multipart/form-data" action="/admin/estates/photo/{{ estate.id }}">
+                <div class="form-group">
+                    <input type="file" name="image" class="form-control">
+                </div>
+                <input type="submit" name="new_image" value="Додати" class="btn btn-success">
+            </form>
+        </div>
+    </div>
+
+{% endblock %}

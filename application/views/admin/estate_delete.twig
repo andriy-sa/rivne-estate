@@ -1,0 +1,11 @@
+{% extends "admin/app.twig" %}
+
+{% block content %}
+    <h2>Ви дійсно хочете видалити нерухомість {{ estate.title }} ?</h2>
+    <form method="post" action="/admin/estates/delete/{{ estate.id }}">
+        <input type="submit" name="delete" class="btn btn-danger" value="Видалити">
+        <a href="/admin/estates" class="btn btn-info">Відміна</a>
+    </form>
+
+
+{% endblock %}

@@ -1,0 +1,37 @@
+{% extends "admin/app.twig" %}
+
+{% block content %}
+
+    {% if errors %}
+        <div class="alert alert-danger" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            {{ errors | raw }}
+        </div>
+    {% endif %}
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <i class="fa fa-2x fa-info-circle"></i>
+        </div>
+        <div class="panel-body">
+            Рекомендований розмір зображення: 1920px/800px
+        </div>
+    </div>
+    <div id="create-slide">
+        <form method="post" enctype="multipart/form-data" action="/admin/slides/insert">
+            <div class="form-group">
+                <label for="">Заголовок</label>
+                <input type="text" name="title" class="form-control" value="{{ set_value('title') }}">
+            </div>
+            <div class="form-group">
+                <label for="">Під-заголовок</label>
+                <input type="text" name="subtitle" class="form-control" value="{{ set_value('subtitle') }}">
+            </div>
+            <div class="form-group">
+                <label for="">Зображення</label>
+                <input type="file" name="image"  class="form-control">
+            </div>
+            <input type="submit" value="Додати" class="btn btn-success">
+        </form>
+    </div>
+
+{% endblock %}

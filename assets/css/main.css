@@ -1,0 +1,28 @@
+@font-face{
+    font-family: 'OpenSans-S';
+    src: url('../fonts/OpenSans Semibold.ttf');
+}
+@font-face{
+    font-family: 'OpenSans';
+    src: url('../fonts/OpenSans.ttf');
+}
+html,body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    font-family: 'Open Sans';
+}
+a:hover {
+    text-decoration: none;
+}
+/* auth */
+body.auth .auth-header {
+    height: 50px;
+    background: #ec971f;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+body.auth .auth-content {
+    max-width: 500px;
+    margin: 0 auto;
+}

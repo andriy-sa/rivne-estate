@@ -1,0 +1,11 @@
+{% extends "admin/app.twig" %}
+
+{% block content %}
+    <h2>Ви дійсно хочете видалити слайд {{ rieltor.title }} ?</h2>
+    <form method="post" action="/admin/rieltors/delete/{{ rieltor.id }}">
+        <input type="submit" name="delete" class="btn btn-danger" value="Видалити">
+        <a href="/admin/rieltors" class="btn btn-info">Відміна</a>
+    </form>
+
+
+{% endblock %}
