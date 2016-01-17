@@ -1605,7 +1605,7 @@ class MY_Model extends CI_Model
      * HELPER FUNCTIONS
      */
 
-    public function paginate($rows_per_page, $total_rows = NULL, $page_number = 1)
+    public function paginate($rows_per_page, $total_rows = NULL, $page_number = 1, $get_query = '')
     {
         $this->load->helper('url');
         $segments = $this->uri->total_segments();
@@ -1623,7 +1623,6 @@ class MY_Model extends CI_Model
         }
         $next_page = $page_number+1;
         $previous_page = $page_number-1;
-
         if($page_number == 1)
         {
             $this->previous_page = $this->pagination_delimiters[0].$this->pagination_arrows[0].$this->pagination_delimiters[1];
@@ -1644,23 +1643,26 @@ class MY_Model extends CI_Model
         {
             $this->next_page = $this->pagination_delimiters[0].anchor($uri_string, $this->pagination_arrows[1]).$this->pagination_delimiters[1];
         }
-
         $rows_per_page = (is_numeric($rows_per_page)) ? $rows_per_page : 10;
-
         if(isset($total_rows))
         {
             if($total_rows!=0)
             {
                 $number_of_pages = ceil($total_rows / $rows_per_page);
-                $links = $this->previous_page;
+               // $links = $this->previous_page;
+                $links ='';
                 for ($i = 1; $i <= $number_of_pages; $i++) {
                     unset($uri_array[$segments]);
                     $uri_string = implode('/', $uri_array);
                     $links .= $this->pagination_delimiters[0];
-                    $links .= (($page_number == $i) ? anchor($uri_string, $i) : anchor($uri_string . '/' . $i, $i));
+                    if($page_number == $i) {
+                        $links .= "<span class='active'><a>".$i."</a></span>";
+                    } else {
+                        $links .= "<span>".anchor($uri_string . '?' .$get_query.'page='. $i, $i)."</span>";
+                    }
                     $links .= $this->pagination_delimiters[1];
                 }
-                $links .= $this->next_page;
+               // $links .= $this->next_page;
                 $this->all_pages = $links;
             }
             else
@@ -1668,8 +1670,6 @@ class MY_Model extends CI_Model
                 $this->all_pages = $this->pagination_delimiters[0].$this->pagination_delimiters[1];
             }
         }
-
-
         if(isset($this->_cache) && !empty($this->_cache))
         {
             $this->load->driver('cache');
@@ -1677,7 +1677,6 @@ class MY_Model extends CI_Model
             $seconds = $this->_cache['seconds'];
             $data = $this->cache->{$this->cache_driver}->get($cache_name);
         }
-
         if(isset($data) && $data !== FALSE)
         {
             return $data;

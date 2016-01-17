@@ -53,6 +53,9 @@ $route['default_controller'] = 'welcome';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 
+$route['estate/(:num)']               = "Estate/estate/$1";
+$route['rieltors']                    = "Estate/rieltors";
+
 /* admin */
 $route['admin/estates']               = "AdminEstate/index";
 $route['admin/estates/insert']        = "AdminEstate/insert";

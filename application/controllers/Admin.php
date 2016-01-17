@@ -204,14 +204,60 @@ class Admin extends Admin_Controller {
     }
 
     public function slides_update($id){
-        $this->twig->display('admin/slide_update',array(
+        $slide = $this->Slide_model->get($id);
+        if(!$slide) show_404();
 
+        $rules = $this->Slide_model->update_rules();
+        $this->form_validation->set_rules($rules);
+
+        if($this->form_validation->run()){
+
+            $data = array(
+                'title'    => $this->input->post('title',0,''),
+                'subtitle' => $this->input->post('subtitle',0,''),
+            );
+
+            $config['upload_path']          = './assets/userfiles/slides/';
+            $config['allowed_types']        = 'gif|jpg|jpeg|png';
+            $config['max_size']             = 10000;
+            $config['encrypt_name']         = true;
+
+            $this->load->library('upload', $config);
+
+            if ($this->upload->do_upload('image'))
+            {
+                $upload_data = $this->upload->data();
+                $data['image'] = $upload_data['file_name'];
+                unlink("assets/userfiles/slides/".$slide->image);
+            }
+            $this->Slide_model->update($data,$id);
+            $this->session->set_flashdata('success', 'Слайд успішно відредаговано!');
+            redirect('/admin/slides');
+        }
+
+        $errors = validation_errors('<p>','</p>');
+
+        $this->twig->display('admin/slide_update',array(
+            "slide"  => $slide,
+            'errors' => $errors,
         ));
     }
 
     public function slides_delete($id){
-        $this->twig->display('admin/slide_delete',array(
 
+        $slide = $this->Slide_model->get($id);
+        if(!$slide) show_404();
+
+        if($this->input->post('delete')){
+            unlink("assets/userfiles/slides/" . $slide->image);
+            $this->Slide_model->delete($id);
+
+            $this->session->set_flashdata('success', 'Слайд успішно видалений!');
+            redirect('/admin/slides');
+        }
+
+        $this->twig->display('admin/slide_delete',array(
+            'slide' => $slide,
         ));
     }
 

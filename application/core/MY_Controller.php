@@ -8,6 +8,17 @@ class MY_Controller extends CI_Controller {
 
         parent::__construct();
 
+        $activeUri = $this->uri->segment(1);
+        $this->twig->addGlobal('activeUri',$activeUri);
+
+        $menuItems = array(
+            ''         => 'Головна',
+            'estate'   => 'Нерухомість',
+            'rieltors' => 'Ріелтори',
+            'comments' => 'Відгуки',
+            'contacts' => 'Зворотній звязок'
+        );
+        $this->twig->addGlobal('menuItems',$menuItems);
     }
 
 }

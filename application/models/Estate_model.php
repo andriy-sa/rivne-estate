@@ -60,4 +60,50 @@ class Estate_model extends MY_Model {
 
         return $rules;
     }
+
+    public function get_latest_top(){
+        $result = $this->where('published',1)
+            ->where('top',1)
+            ->order_by('created_at','desc')
+            ->limit(5)
+            ->with_photos()
+            ->with_category()
+            ->with_district()
+            ->with_rieltor()
+            ->get_all();
+
+        return $result;
+    }
+
+    public function get_estate($id) {
+        $result = $this->where('published',1)
+            ->with_photos()
+            ->with_category()
+            ->with_district()
+            ->with_rieltor()
+            ->get($id);
+
+        return $result;
+    }
+
+    public function get_filtered_estates($category,$districts,$type){
+        $result = $this->where('published',1)
+            ->order_by('created_at','desc')
+            ->with_photos()
+            ->with_category()
+            ->with_district()
+            ->with_rieltor();
+
+        if($category){
+            $result = $this->where("category_id",$category);
+        }
+        if($districts){
+            $result = $this->where("district_id",$districts);
+        }
+        if($type){
+            $result = $this->where("type",$type);
+        }
+
+        return $result;
+    }
 }

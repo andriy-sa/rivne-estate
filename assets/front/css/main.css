@@ -1723,3 +1723,156 @@ article .pager span a {
   background: #ec483b;
   margin-top: 5px;
 }
+section#latest-top {
+  background: #fff;
+  padding:25px 0;
+}
+section#latest-top .nav.nav-tabs .nolink-photo {
+  float: left;
+  max-width: 200px;
+  margin-right: 10px;
+}
+section#latest-top .nav.nav-tabs > li.active > a  {
+  border: 3px solid #ec483b;
+  border-radius: 5px;
+  background: #f5f5f5;
+}
+section#latest-top .nav.nav-tabs > li > a  {
+  overflow: hidden;
+  border: 3px solid transparent;
+}
+section#latest-top .nav.nav-tabs > li > a:hover  {
+  background: transparent;
+  border: 3px solid transparent;
+}
+section#latest-top .nav.nav-tabs > li.active > a:hover  {
+  border: 3px solid #ec483b;
+  border-radius: 5px;
+  background: #f5f5f5;
+}
+section#latest-top .nav.nav-tabs {
+  border: 0;
+}
+.field-title a {
+  margin-top: 5px;
+  color:#0000FF;
+  display: block;
+  font-size: 14px;
+}
+.field-title a:hover,
+.field-title a:focus,
+.field-title a.active {
+  color: #ec483b;
+  outline: none;
+  text-decoration: none;
+}
+.maylabel {
+  color: #000;
+  margin-right: 5px;
+  font-weight: 600;
+}
+ .field-price {
+  margin-bottom: 10px;
+}
+.field-price .val {
+  font-size: 16px;
+  color:#985f0d;
+  font-weight: 600;
+} .field-price .val span {
+  font-size: 13px;
+  color: #ec483b;
+}
+section#latest-top .field-title a {
+  font-size: 18px;
+}
+section#latest-top .nolink-price {
+  color:#985f0d;
+  font-weight: 600;
+  display: block;
+}
+section#latest-top .nolink-price span {
+  font-size: 13px;
+  color: #ec483b;
+}
+.slick-slide {
+  height: auto;
+}
+#estate-node .col-sm-2.left-sidebar {
+  padding-left: 0;
+  padding-right: 0;
+  padding-top: 20px;
+}
+.blobk-block .block-header {
+  background: #ec483b;
+  color: #fff;
+}
+.blobk-block .block-content {
+  padding: 5px;
+}
+.blobk-block.rieltor-block .block-field-name {
+  margin-top: 5px;
+  margin-bottom: 5px;
+  color: #ec483b;
+}
+.col-sm-7.thumb-sa-galery {
+  padding-bottom: 20px;
+}
+.col-sm-10.center-content {
+  padding-bottom: 20px;
+}
+
+.css-input input {
+  position: absolute;
+  opacity: 0;
+}
+.css-checkbox-warning input:checked + span {
+  background-color: #ec483b;
+  border-color: #f3b760;
+}
+.css-checkbox input + span {
+  width: 20px;
+  height: 20px;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  -webkit-transition: background-color 0.2s;
+  transition: background-color 0.2s;
+}
+.css-input input + span {
+  position: relative;
+  display: inline-block;
+  margin-top: -2px;
+  margin-right: 3px;
+  vertical-align: middle;
+}
+.css-input span.fa-check {
+  color:#fff;
+  text-align: center;
+}
+ul.pager li span.active a{
+  background: #f1f1f1;
+}
+.estates-items .item {
+  overflow: hidden;
+  padding-left: 10px;
+}
+.estates-items .item .field-photo {
+  max-width: 320px;
+  float: right;
+}
+.estates-items .item .field-title a {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+.filter-sidebar .css-checkbox {
+  padding-left: 15px;
+}
+.filter-sidebar .filter-header {
+  font-size: 16px;
+  color:#fff;
+  background: #ec483b;
+  padding: 5px;
+  margin-bottom: 10px;
+}
+.filter-sidebar select.form-control {
+  margin-bottom: 5px;
+}

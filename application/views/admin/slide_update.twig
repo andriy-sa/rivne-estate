@@ -17,20 +17,28 @@
         </div>
     </div>
     <div id="create-slide">
-        <form method="post" enctype="multipart/form-data" action="/admin/slides/insert">
+        <form method="post" enctype="multipart/form-data" action="/admin/slides/update/{{ slide.id }}">
             <div class="form-group">
                 <label for="">Заголовок</label>
-                <input type="text" name="title" class="form-control" value="{{ set_value('title') }}">
+                <input type="text" name="title" class="form-control" value="{{ slide.title }}">
             </div>
             <div class="form-group">
                 <label for="">Під-заголовок</label>
-                <input type="text" name="subtitle" class="form-control" value="{{ set_value('subtitle') }}">
+                <input type="text" name="subtitle" class="form-control" value="{{ slide.subtitle }}">
             </div>
             <div class="form-group">
-                <label for="">Зображення</label>
-                <input type="file" name="image"  class="form-control">
+                <div class="col-sm-4">
+                    {% if slide.image %}
+                        <img src="/assets/userfiles/slides/{{ slide.image }}" alt="{{ slide.title }}" width="100px" height="50px">
+                    {% endif %}
+                </div>
+                <div class="col-sm-8">
+                    <label for="">Зображення</label>
+                    <input type="file" name="image"  class="form-control">
+                </div>
             </div>
-            <input type="submit" value="Додати" class="btn btn-success">
+            <div class="clearfix"></div>
+            <input type="submit" value="Зберегти" class="btn btn-success">
         </form>
     </div>
 

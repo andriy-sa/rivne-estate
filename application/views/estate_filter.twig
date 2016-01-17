@@ -1,0 +1,128 @@
+{% extends "app.twig" %}
+
+{% block title %}
+    Нерухомість | RivneEstate
+{% endblock %}
+
+{% block content %}
+    <div class="page-header">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <h2 class="entry-title">Нерухомість в Рівному</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+    <section id="estate-view">
+        <div class="container">
+            <div class="col-sm-3 filter-sidebar">
+                <form class="blobk-block entry-widget" method="get" action="/estate">
+                    <div class="form-group">
+                        <div class="filter-header">
+                            Виберіть категорію
+                        </div>
+                        {% for item in category %}
+                        <div class="css-checkbox css-checkbox-warning css-input">
+                            <label >
+                                <input {% if item.id in get_cat_arr %} checked {% endif %} value="{{ item.id }}" name="cat[]" type="checkbox">
+                                <span class="fa fa-check"></span>
+                                {{ item.title }}
+                            </label>
+                        </div>
+                        {% endfor %}
+                    </div>
+                    <div class="form-group">
+                        <div class="filter-header">
+                            Виберіть тип
+                        </div>
+                        <select class="form-control" name="type">
+                            <option value="">Всі</option>
+                            <option {% if type == "Продаж" %} selected {% endif %} value="Продаж">Продаж</option>
+                            <option {% if type == "Аренда" %} selected {% endif %} value="Аренда">Аренда</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <div class="filter-header">
+                            Виберіть район
+                        </div>
+                        {% for item in districts %}
+                            <div class="css-checkbox css-checkbox-warning css-input">
+                                <label >
+                                    <input {% if item.id in get_dis_arr %} checked {% endif %} value="{{ item.id }}" name="dis[]" type="checkbox">
+                                    <span class="fa fa-check"></span>
+                                    {{ item.title }}
+                                </label>
+                            </div>
+                        {% endfor %}
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-info">Пошук</button>
+                    </div>
+                </form>
+            </div>
+            <div class="col-sm-9 center-content">
+                <div class="estates-items">
+                    {% for item in estates %}
+                        <div class="item entry-widget">
+                            <div class="field-photo">
+                                <a href="/estate/{{ item.id }}">
+                                    {% if item.photos %}
+                                        <img src="/assets/userfiles/photo/{{ item.photos.0.image }}" alt="{{ item.title }}">
+                                    {% else %}
+                                        <img src="/assets/userfiles/default.png" alt="{{ item.title }}">
+                                    {% endif %}
+                                </a>
+                            </div>
+                            <div class="field-title">
+                                <a href="/estate/{{ item.id }}">
+                                    {{ item.title }}
+                                </a>
+                            </div>
+                            <div class="field-district">
+                            <span class="maylabel">
+                                Район:
+                            </span>
+                            <span class="val">
+                                {{ item.district.title }}
+                            </span>
+                            </div>
+                            <div class="field-address">
+                            <span class="maylabel">
+                                Адреса:
+                            </span>
+                            <span class="val">
+                                {{ item.address }}
+                            </span>
+                            </div>
+                            <div class="field-type">
+                            <span class="maylabel">
+                                Тип:
+                            </span>
+                            <span class="val">
+                                {{ item.type }}
+                            </span>
+                            </div>
+                            <div class="field-price">
+                            <span class="maylabel">
+                                Ціна:
+                            </span>
+                            <span class="val">
+                                {{ item.price |number_format(2,'.',',') }} <span>{{ item.currency }}</span>
+                            </span>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+                {% if total_estates > 10 %}
+                <article>
+                    <ul class="pager">
+                        {{ pagination | raw }}
+                    </ul>
+                </article>
+                {% endif %}
+            </div>
+        </div>
+    </section>
+{% endblock %}
+
