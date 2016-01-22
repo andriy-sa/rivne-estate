@@ -1610,15 +1610,15 @@ class MY_Model extends CI_Model
         $this->load->helper('url');
         $segments = $this->uri->total_segments();
         $uri_array = $this->uri->segment_array();
-        $page = $this->uri->segment($segments);
+        $page = $page_number;
         if(is_numeric($page))
         {
             $page_number = $page;
         }
         else
         {
-            $page_number = $page_number;
-            $uri_array[] = $page_number;
+            $page_number = 1;
+            $uri_array[] = 1;
             ++$segments;
         }
         $next_page = $page_number+1;
@@ -1658,7 +1658,7 @@ class MY_Model extends CI_Model
                     if($page_number == $i) {
                         $links .= "<span class='active'><a>".$i."</a></span>";
                     } else {
-                        $links .= "<span>".anchor($uri_string . '?' .$get_query.'page='. $i, $i)."</span>";
+                        $links .= "<span>".anchor($uri_string.$get_query.'page='. $i, $i)."</span>";
                     }
                     $links .= $this->pagination_delimiters[1];
                 }

@@ -1,0 +1,43 @@
+<form class="blobk-block entry-widget" method="get" action="/estate">
+    <div class="form-group">
+        <div class="filter-header">
+            Виберіть категорію
+        </div>
+        {% for item in category %}
+            <div class="css-checkbox css-checkbox-warning css-input">
+                <label >
+                    <input {% if item.id in get_cat_arr %} checked {% endif %} value="{{ item.id }}" name="cat[]" type="checkbox">
+                    <span class="fa fa-check"></span>
+                    {{ item.title }}
+                </label>
+            </div>
+        {% endfor %}
+    </div>
+    <div class="form-group">
+        <div class="filter-header">
+            Виберіть тип
+        </div>
+        <select class="form-control" name="type">
+            <option value="">Всі</option>
+            <option {% if type == "Продаж" %} selected {% endif %} value="Продаж">Продаж</option>
+            <option {% if type == "Аренда" %} selected {% endif %} value="Аренда">Аренда</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <div class="filter-header">
+            Виберіть район
+        </div>
+        {% for item in districts %}
+            <div class="css-checkbox css-checkbox-warning css-input">
+                <label >
+                    <input {% if item.id in get_dis_arr %} checked {% endif %} value="{{ item.id }}" name="dis[]" type="checkbox">
+                    <span class="fa fa-check"></span>
+                    {{ item.title }}
+                </label>
+            </div>
+        {% endfor %}
+    </div>
+    <div class="form-group">
+        <button type="submit" class="btn btn-info">Пошук</button>
+    </div>
+</form>

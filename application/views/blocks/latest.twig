@@ -1,0 +1,33 @@
+{% if latest %}
+    <div class="blobk-block latest-block entry-widget">
+        <div class="block-header widget-title">
+            {{ latest_title }}
+        </div>
+        <div class="block-content">
+            {% for item in latest %}
+                <div class="item {% if loop.last %}last{% endif %}">
+                    <div class="field-photo">
+                        <a href="/estate/{{ item.id }}">
+                            {% if item.photos %}
+                                <img src="/assets/userfiles/photo/{{ item.photos.0.image }}" alt="{{ item.title }}">
+                            {% else %}
+                                <img src="/assets/userfiles/default.png" alt="{{ item.title }}">
+                            {% endif %}
+                        </a>
+                    </div>
+                    <div class="field-title">
+                        <a href="/estate/{{ item.id }}">{{ item.title }}</a>
+                    </div>
+                    <div class="field-address">
+                        {{ item.address }}
+                    </div>
+                    <div class="field-price">
+                        <div class="val">
+                            {{ item.price |number_format(2,'.',',') }} <span>{{ item.currency }}</span>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endif %}

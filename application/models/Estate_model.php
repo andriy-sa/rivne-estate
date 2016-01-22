@@ -75,6 +75,19 @@ class Estate_model extends MY_Model {
         return $result;
     }
 
+    public function get_latest(){
+        $result = $this->where('published',1)
+            ->order_by('created_at','desc')
+            ->limit(5)
+            ->with_photos()
+            ->with_category()
+            ->with_district()
+            ->with_rieltor()
+            ->get_all();
+
+        return $result;
+    }
+
     public function get_estate($id) {
         $result = $this->where('published',1)
             ->with_photos()
@@ -103,6 +116,18 @@ class Estate_model extends MY_Model {
         if($type){
             $result = $this->where("type",$type);
         }
+
+        return $result;
+    }
+
+    public function get_by_rieltor($id){
+        $result = $this->where('published',1)
+            ->where('rieltor_id',$id)
+            ->order_by('created_at','desc')
+            ->with_photos()
+            ->with_category()
+            ->with_district()
+            ->with_rieltor();
 
         return $result;
     }

@@ -55,6 +55,8 @@ $route['translate_uri_dashes'] = FALSE;
 
 $route['estate/(:num)']               = "Estate/estate/$1";
 $route['rieltors']                    = "Estate/rieltors";
+$route['rieltors/(:num)']             = "Estate/rieltor_estate/$1";
+$route['comments']                    = "Welcome/comments";
 
 /* admin */
 $route['admin/estates']               = "AdminEstate/index";

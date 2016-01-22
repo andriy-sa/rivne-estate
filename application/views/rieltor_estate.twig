@@ -1,0 +1,90 @@
+{% extends "app.twig" %}
+
+{% block title %}
+    {{ rieltor.name }} | RivneEstate
+{% endblock %}
+
+{% block content %}
+    <div class="page-header">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <h2 class="entry-title">Нерухосіть ріелтора {{ rieltor.name }}</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+    <section id="estates-view">
+        <div class="container">
+            <div class="col-sm-3 left-sidebar">
+                {% include "blocks/latest.twig" %}
+            </div>
+            <div class="col-sm-9 center-content">
+                <div class="estates-items">
+                    {% for item in estates %}
+                        <div class="item entry-widget">
+                            <div class="field-photo">
+                                <a href="/estate/{{ item.id }}">
+                                    {% if item.photos %}
+                                        <img src="/assets/userfiles/photo/{{ item.photos.0.image }}" alt="{{ item.title }}">
+                                    {% else %}
+                                        <img src="/assets/userfiles/default.png" alt="{{ item.title }}">
+                                    {% endif %}
+                                </a>
+                            </div>
+                            <div class="field-title">
+                                <a href="/estate/{{ item.id }}">
+                                    {{ item.title }}
+                                </a>
+                            </div>
+                            <div class="field-district">
+                            <span class="maylabel">
+                                Район:
+                            </span>
+                            <span class="val">
+                                {{ item.district.title }}
+                            </span>
+                            </div>
+                            <div class="field-address">
+                            <span class="maylabel">
+                                Адреса:
+                            </span>
+                            <span class="val">
+                                {{ item.address }}
+                            </span>
+                            </div>
+                            <div class="field-type">
+                            <span class="maylabel">
+                                Тип:
+                            </span>
+                            <span class="val">
+                                {{ item.type }}
+                            </span>
+                            </div>
+                            <div class="field-price">
+                            <span class="maylabel">
+                                Ціна:
+                            </span>
+                            <span class="val">
+                                {{ item.price |number_format(2,'.',',') }} <span>{{ item.currency }}</span>
+                            </span>
+                            </div>
+                        </div>
+                    {% endfor %}
+                    {% if not estates %}
+                        <p>По вашому запиту нічого незнайдено!</p>
+                    {% endif %}
+
+                    {% if total_estates > 10 %}
+                        <article>
+                            <ul class="pager">
+                                {{ pagination | raw }}
+                            </ul>
+                        </article>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}
+

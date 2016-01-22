@@ -17,10 +17,26 @@
     <section id="rieltors-view">
         <div class="container">
             <div class="col-sm-3 left-sidebar">
-
+                {% include "blocks/latest.twig" %}
             </div>
             <div class="col-sm-9 center-content">
-
+                <div class="rieltors-view">
+                    {% for item in rieltors %}
+                        <div class="item entry-widget">
+                            <div class="field-photo">
+                                <img class="img-responsive" src="/assets/userfiles/rieltors/{{ item.photo }}" alt="{{ item.name }}">
+                            </div>
+                            <div class="field-name">
+                                {{ item.name }}
+                            </div>
+                            <div class="field-phone">
+                                {{ item.phone |replace({"\n":"<br />"})|raw }}
+                            </div>
+                            <div class="clearfix"></div>
+                            <a href="/rieltors/{{ item.id }}" class="btn">Переглянути нерухомість ріелтора</a>
+                        </div>
+                    {% endfor %}
+                </div>
             </div>
         </div>
     </section>
