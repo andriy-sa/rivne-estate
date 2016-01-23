@@ -57,6 +57,8 @@ $route['estate/(:num)']               = "Estate/estate/$1";
 $route['rieltors']                    = "Estate/rieltors";
 $route['rieltors/(:num)']             = "Estate/rieltor_estate/$1";
 $route['comments']                    = "Welcome/comments";
+$route['contacts']                    = "Welcome/contacts";
+
 
 /* admin */
 $route['admin/estates']               = "AdminEstate/index";
@@ -74,3 +76,7 @@ $route['admin/slides']                 = "Admin/slides";
 $route['admin/slides/insert']          = "Admin/slides_insert";
 $route['admin/slides/update/(:num)']   = "Admin/slides_update/$1";
 $route['admin/slides/delete/(:num)']   = "Admin/slides_delete/$1";
+$route['admin/requests']              = "Admin/requests";
+$route['admin/requests/(:num)']       = "Admin/requests_detail/$1";
+$route['admin/comments']              = "Admin/comments";
+$route['admin/comments/(:num)']       = "Admin/comments_detail/$1";

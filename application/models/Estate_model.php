@@ -131,4 +131,10 @@ class Estate_model extends MY_Model {
 
         return $result;
     }
+
+    public function get_all_count($publish = 1){
+        $result = $this->where('published',$publish)->count();
+
+        return $result;
+    }
 }

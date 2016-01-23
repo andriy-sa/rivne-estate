@@ -14,7 +14,7 @@
             </div>
         </div>
     </div>
-    <section id="estates-view">
+    <section id="comments">
         <div class="container">
             <div class="col-sm-3 left-sidebar">
                 {% include "blocks/latest.twig" %}
@@ -38,13 +38,13 @@
                     </button>
                     <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
                         {% for item in comments %}
-                        <div class="panel panel-default">
+                        <div class="panel panel-danger">
                             <div class="panel-heading" role="tab" id="headingOne">
                                 <h4 class="panel-title">
                                     <a role="button" data-toggle="collapse" data-parent="#accordion" href="#item-{{ item.id }}" aria-expanded="true" aria-controls="item-{{ item.id }}">
                                         <span class="name">{{ item.name }}</span>
-                                        Дата:
-                                        <span class="date">{{ item.created_at |date('d-m-Y') }}</span>
+
+                                        <span class="date">Дата: {{ item.created_at |date('d-m-Y') }}</span>
                                     </a>
                                 </h4>
                             </div>

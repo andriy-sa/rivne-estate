@@ -1,0 +1,30 @@
+{% extends "admin/app.twig" %}
+
+{% block content %}
+    <div class="request-detail">
+       <div class="form-group">
+           <label for="">Імя</label>
+           <input type="text" readonly value="{{ request.name }}" class="form-control">
+       </div>
+        <div class="form-group">
+            <label for="">Телефон</label>
+            <input type="text" readonly value="{{ request.phone }}" class="form-control">
+        </div>
+        <div class="form-group">
+            <label for="">Email</label>
+            <input type="text" readonly value="{{ request.email }}" class="form-control">
+        </div>
+        <div class="form-group">
+            <label for="">Дата</label>
+            <input type="text" readonly value="{{ request.created_at |date('d.m.Y G:i') }}" class="form-control">
+        </div>
+        <div class="form-group">
+            <label for="">Повідомлення</label>
+            <textarea class="form-control" rows="7" readonly>{{ request.message }}</textarea>
+        </div>
+        <form action="/admin/requests/{{ request.id }}" method="post">
+            <button name="delete" type="submit" class="btn btn-danger">Видалити</button>
+            <a href="/admin/requests" class="btn btn-info">До списку</a>
+        </form>
+    </div>
+{% endblock %}

@@ -13,15 +13,25 @@ class Admin extends Admin_Controller {
     }
 
     public function index(){
+        $this->load->model(['Estate_model','Comment_model','Request_model']);
 
-        $this->twig->display('admin/front');
+        $comment_count   = $this->Comment_model->get_all_count();
+        $request_count   = $this->Request_model->get_all_count();
+        $publish_count   = $this->Estate_model->get_all_count(1);
+        $unpublish_count = $this->Estate_model->get_all_count(0);
+
+        $this->twig->display('admin/front',array(
+            'comment_count'   => $comment_count,
+            'request_count'   => $request_count,
+            'publish_count'   => $publish_count,
+            'unpublish_count' => $unpublish_count,
+        ));
     }
 
     public function rieltors(){
 
         $rieltors = $this->Rieltor_model->order_by('id','desc')->get_all();
-        /*dump($rieltors);
-        exit();*/
+
         $success = $this->session->flashdata('success');
 
         $this->twig->display('admin/rieltors',array(
@@ -261,4 +271,56 @@ class Admin extends Admin_Controller {
         ));
     }
 
+    public function requests(){
+
+        $requests = $this->Request_model->order_by('created_at','desc')->get_all();
+        $success = $this->session->flashdata('success');
+
+        $this->twig->display('admin/requests',array(
+            'requests' => $requests,
+            'success'  => $success,
+        ));
+    }
+
+    public function requests_detail($id){
+        $request = $this->Request_model->get($id);
+        if(!$request) show_404();
+
+        if($this->input->post()){
+            $this->Request_model->delete($id);
+            $this->session->set_flashdata('success','Повідомлення успішно видалено!');
+            redirect('/admin/requests');
+        }
+
+        $this->twig->display('admin/request_detail',array(
+            'request' => $request,
+        ));
+    }
+
+    public function comments(){
+        $this->load->model('Comment_model');
+        $comments = $this->Comment_model->order_by('created_at','desc')->get_all();
+        $success = $this->session->flashdata('success');
+
+        $this->twig->display('admin/comments',array(
+            'comments'  => $comments,
+            'success'   => $success,
+        ));
+    }
+
+    public function comments_detail($id){
+        $this->load->model('Comment_model');
+        $comment = $this->Comment_model->get($id);
+        if(!$comment) show_404();
+
+        if($this->input->post()){
+            $this->Comment_model->delete($id);
+            $this->session->set_flashdata('success','Коментар успішно видалено!');
+            redirect('/admin/comments');
+        }
+
+        $this->twig->display('admin/comments_detail',array(
+            'comment' => $comment,
+        ));
+    }
 }

@@ -1952,4 +1952,31 @@ ul.pager li span.active a{
   filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffab23', endColorstr='#ffec64',GradientType=0);
   background-color:#ffab23;
 }
-
+.form-control {
+  border:1px solid #985f0d;
+}
+#contacts .col-sm-9.center-content .entry-widget {
+  padding: 15px;
+}
+#comments .col-sm-9.center-content .entry-widget #accordion {
+  padding-left: 15px;
+  padding-right: 15px;
+  padding-bottom: 15px;
+}
+#comments .col-sm-9.center-content .entry-widget button.form-control {
+  color:#fff !important;
+  background: #985f0d;
+}
+#comments .col-sm-9.center-content .entry-widget #accordion .panel-title span.date {
+  font-size: 12px;
+  color:#000;
+  float: right;
+}
+#comments .col-sm-9.center-content .entry-widget #accordion .panel-title span.name {
+  font-weight: 600;
+  color: #985f0d;
+}
+#commentModal .modal-header {
+  background: #ec483b;
+  color: #fff;
+}

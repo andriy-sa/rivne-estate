@@ -1,0 +1,22 @@
+{% extends "admin/app.twig" %}
+
+{% block content %}
+    <div class="comment-detail">
+        <div class="form-group">
+            <label for="">Автор</label>
+            <input type="text" readonly value="{{ comment.name }}" class="form-control">
+        </div>
+        <div class="form-group">
+            <label for="">Дата</label>
+            <input type="text" readonly value="{{ comment.created_at |date('d.m.Y G:i') }}" class="form-control">
+        </div>
+        <div class="form-group">
+            <label for="">Коментар</label>
+            <textarea class="form-control" rows="7" readonly>{{ comment.text }}</textarea>
+        </div>
+        <form action="/admin/comments/{{ comment.id }}" method="post">
+            <button name="delete" type="submit" class="btn btn-danger">Видалити</button>
+            <a href="/admin/comments" class="btn btn-info">До списку</a>
+        </form>
+    </div>
+{% endblock %}

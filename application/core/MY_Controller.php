@@ -30,6 +30,9 @@ class Admin_Controller extends CI_Controller {
         parent::__construct();
 
         $this->load->library('ion_auth');
+        $this->load->model('Request_model');
+        $last_requests = $this->Request_model->get_last_request();
+        $this->twig->addGlobal('last_requests',$last_requests);
 
         if(!$this->ion_auth->logged_in() || !$this->ion_auth->is_admin()){
             redirect('/');
